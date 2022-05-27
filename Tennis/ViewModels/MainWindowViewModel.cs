@@ -1,87 +1,117 @@
-﻿using System;
+using Avalonia.Media;
+using Avalonia;
+using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using ReactiveUI;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Reactive.Linq;
+using System.Text;
+using System.Xml.Serialization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 using Tennis.Models;
-using Tennis.Models.Database;
-using Tennis.Models.StaticTabs;
+using System.Collections.Specialized;
+using Tennis;
 
 namespace Tennis.ViewModels
 {
+
     public class MainWindowViewModel : ViewModelBase
     {
-        public MainWindowViewModel()
+        private Request _request;
+        public Request SelectedRequest
         {
-            CreateContext();
-            CreateTabs();
-            CreateQueries();
-            Content = Fv = new FirstViewModel(this);
-            Sv = new SecondViewModel(this);
+            get => _request;
+            set => this.RaiseAndSetIfChanged(ref _request, value);
         }
-        ViewModelBase content;
+
+
+        private ObservableCollection<Request> _requests;
+        public ObservableCollection<Request> Requests
+        {
+            get => _requests;
+            set => this.RaiseAndSetIfChanged(ref _requests, value);
+        }
+
+        public ObservableCollection<Match> Match { get; set; }
+        public ObservableCollection<Player> Player { get; set; }
+        public ObservableCollection<PlayerStat> PlayerStat { get; set; }
+        public ObservableCollection<Quarter> Quarter { get; set; }
+        public ObservableCollection<Tourney> Tourney { get; set; }
+        public ObservableCollection<Season> Season { get; set; }
+
+        private ViewModelBase _content;
         public ViewModelBase Content
         {
-            get { return content; }
-            set { this.RaiseAndSetIfChanged(ref content, value); }
-        }
-        public void Change()
-        {
-            if (Content == Fv)
-                Content = Sv;
-            else if (Content == Sv)
-                Content = Fv;
-            else throw new InvalidOperationException();
+            get => _content;
+            set => this.RaiseAndSetIfChanged(ref _content, value);
         }
 
-        ObservableCollection<MyTab> tabs;
-        public ObservableCollection<MyTab> Tabs
+        public MainWindowViewModel()
         {
-            get { return tabs; }
-            set { this.RaiseAndSetIfChanged(ref tabs, value); }
+
+            using (var db = new tennisContext())
+            {
+                this.Match = new ObservableCollection<Match>(db.Matches);
+                this.Player = new ObservableCollection<Player>(db.Players);
+                this.PlayerStat = new ObservableCollection<PlayerStat>(db.PlayerStats);
+                this.Quarter = new ObservableCollection<Quarter>(db.Quarters);
+                this.Tourney = new ObservableCollection<Tourney>(db.Tourneys);
+                this.Season = new ObservableCollection<Season>(db.Seasons);
+            }
+            Content = new DataBaseViewModel();
+            Requests = new ObservableCollection<Request>()
+            {
+                new Request("1"),
+                new Request("2")
+            };
+
+
+        }
+        public void CreateRequest()
+        {
+            Requests.Add(new Request("New request"));
+        }
+        public void DeleteRequest(Request e)
+        {
+            Requests.Remove(e);
+        }
+        public void SQLRequestOpen()
+        {
+            Content = new SQLRequestViewModel();
         }
 
-        ObservableCollection<Query> queries;
-        public ObservableCollection<Query> Queries
-        {
-            get { return queries; }
-            set { this.RaiseAndSetIfChanged(ref queries, value); }
-        }
+        public void DeleteMatch(Match entity) => Match.Remove(entity);
+        public void DeletePlayer(Player entity) => Player.Remove(entity);
+        public void DeletePlayerStat(PlayerStat entity) => PlayerStat.Remove(entity);
+        public void DeleteQuarter(Quarter entity) => Quarter.Remove(entity);
+        public void DeleteTourney(Tourney entity) => Tourney.Remove(entity);
+        public void DeleteSeason(Season entity) => Season.Remove(entity);
 
-        public FirstViewModel Fv { get; }
-        public SecondViewModel Sv { get; }
 
-        rgr_hContext data;
+        public void CreateMatch() => Match.Add(new Match() { Id = 0, Winner = 0, Player1 = 0, Player2 = 0, Quarter = 0 });
+        public void CreatePlayer() => Player.Add(new Player()
+        {
+            Id = 0,
+            Name = "new",
+            Country = "new",
+            Rank = 0,
+        });
 
-        public rgr_hContext Data
+        public void CreatePlayerStat() => PlayerStat.Add(new PlayerStat() {Id = 0, Aces = 0, DoubleFaults = 0, Match = 0, Player = 0, Score = 0 });
+        public void CreateQuarter() => Quarter.Add(new Quarter() { Id = 0, QtrType = 0, Tourney = 0 });
+        public void CreateTourney() => Tourney.Add(new Tourney() { Id = 0, Place = "new", Name = "new", Season = 0 });
+        public void CreateSeason() => Season.Add(new Season { Id = 0, StartDate = "new", EndDate = "new", Name = "new" });
+        public void SQLRequestRun()
         {
-            get { return data; }
-            set { this.RaiseAndSetIfChanged(ref data, value); }
-        }
-        private void CreateContext()
-        {
-            Data = new rgr_hContext();
-        }
 
-        private void CreateTabs()
-        {
-            Tabs = new ObservableCollection<MyTab>();
-            Tabs.Add(new MatchTab("Match", Data.Matches));
-            Tabs.Add(new PlayerTab("Player", Data.Players));
-            Tabs.Add(new PlayerStatsTab("PlayerStats", Data.PlayerStatses));
-            Tabs.Add(new TeamTab("Quarter", Data.Teams));
-            Tabs.Add(new TeamTab("Season", Data.Teams));
-            Tabs.Add(new TeamTab("Tourney", Data.Teams));
-        }
-        private void CreateQueries()
-        {
-            Queries = new ObservableCollection<Query>();
-            Queries.Add(new Query("firstquery"));
-            Queries.Add(new Query("seconquery"));
-            Queries.Add(new Query("thirdquery"));
-            Queries.Add(new Query("fourth"));
+            using (var db = new tennisContext())
+            {
+
+            }
+            Content = new DataBaseViewModel();
         }
     }
 }
