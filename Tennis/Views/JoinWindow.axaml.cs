@@ -2,10 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using RGR.Models;
+using Tennis.Models;
 using System.Data;
 
-namespace RGR.Views
+namespace Tennis.Views
 {
     public partial class JoinWindow : Window
     {

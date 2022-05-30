@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace RGR.Models
+namespace Tennis.Models
 {
     public class JoinResult
     {

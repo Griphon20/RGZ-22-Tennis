@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using ReactiveUI;
 using System.ComponentModel;
 
-namespace RGR.Models
+namespace Tennis.Models
 {
     public class MyQuery: DataTable, IReactiveObject
     {

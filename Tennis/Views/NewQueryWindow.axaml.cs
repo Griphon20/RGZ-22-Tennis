@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using System.Data;
 
-namespace RGR.Views
+namespace Tennis.Views
 {
     public partial class NewQueryWindow : Window
     {

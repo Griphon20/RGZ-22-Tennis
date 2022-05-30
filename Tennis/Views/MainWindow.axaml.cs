@@ -4,11 +4,11 @@ using Avalonia.Interactivity;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-using RGR.Models;
-using RGR.ViewModels;
+using Tennis.Models;
+using Tennis.ViewModels;
 using System.Collections.Generic;
 
-namespace RGR.Views
+namespace Tennis.Views
 {
     public partial class MainWindow : Window
     {

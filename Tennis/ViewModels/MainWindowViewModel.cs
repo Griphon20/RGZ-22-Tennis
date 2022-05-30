@@ -4,10 +4,10 @@ using System.Text;
 using System.Data.SQLite;
 using System.Data;
 using ReactiveUI;
-using RGR.Models;
+using Tennis.Models;
 using System.Collections.ObjectModel;
 
-namespace RGR.ViewModels
+namespace Tennis.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {

@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using RGR.ViewModels;
-using RGR.Views;
+using Tennis.ViewModels;
+using Tennis.Views;
 
-namespace RGR
+namespace Tennis
 {
     public partial class App : Application
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
 
-namespace RGR.Models
+namespace Tennis.Models
 {
     public class WhereItem: ReactiveObject
     {

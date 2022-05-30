@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
 using System.Data;
-using RGR.Models;
+using Tennis.Models;
 
-namespace RGR.ViewModels
+namespace Tennis.ViewModels
 {
     public class QueryWindowViewModel: ViewModelBase
     {

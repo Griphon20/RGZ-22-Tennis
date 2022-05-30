@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using RGR.ViewModels;
+using Tennis.ViewModels;
 using System;
 
-namespace RGR
+namespace Tennis
 {
     public class ViewLocator : IDataTemplate
     {

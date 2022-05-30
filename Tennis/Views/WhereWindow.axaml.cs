@@ -2,10 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using RGR.ViewModels;
+using Tennis.ViewModels;
 using System.Data;
 
-namespace RGR.Views
+namespace Tennis.Views
 {
     public partial class WhereWindow : Window
     {

@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RGR.Models
+namespace Tennis.Models
 {
     public class DBContext
     {
-        static DBContext? instance = null;
+        static DBContext? DB = null;
         public static DBContext getInstance()
         {
-            if (instance == null) instance = new DBContext();
-            return instance;
+            if (DB == null) DB = new DBContext();
+            return DB;
         }
 
 

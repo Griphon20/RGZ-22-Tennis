@@ -2,12 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using RGR.ViewModels;
-using RGR.Models;
+using Tennis.ViewModels;
+using Tennis.Models;
 using System.Data;
 using System.Collections.Generic;
 
-namespace RGR.Views
+namespace Tennis.Views
 {
     public partial class QueryWindow : Window
     {

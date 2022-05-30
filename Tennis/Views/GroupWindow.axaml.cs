@@ -4,7 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System.Data;
 
-namespace RGR.Views
+namespace Tennis.Views
 {
     public partial class GroupWindow : Window
     {

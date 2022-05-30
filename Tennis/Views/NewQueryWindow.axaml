@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" 
-        x:Class="RGR.Views.NewQueryWindow"
+        x:Class="Tennis.Views.NewQueryWindow"
         Height="300"
         Width="400"
         CanResize="False"
